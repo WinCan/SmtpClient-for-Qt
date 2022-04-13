@@ -16,47 +16,46 @@
   See the LICENSE file for more details.
 */
 
-#ifndef MIMEFILE_H
-#define MIMEFILE_H
+#ifndef EMAILADDRESS_H
+#define EMAILADDRESS_H
 
-#include "mimepart.h"
-#include <QFile>
+#include <QObject>
 
-#include "smtpexports.h"
+#include "smtp_export.h"
 
-class SMTP_EXPORT MimeFile : public MimePart
+class SMTP_EXPORT EmailAddress : public QObject
 {
     Q_OBJECT
 public:
 
     /* [1] Constructors and Destructors */
 
-    MimeFile(const QByteArray& stream, const QString& fileName);
-    MimeFile(QFile *f);
-    ~MimeFile();
+    EmailAddress();
+    EmailAddress(const QString & address, const QString & name="");
+
+    ~EmailAddress();
 
     /* [1] --- */
 
 
     /* [2] Getters and Setters */
+    void setName(const QString & name);
+    void setAddress(const QString & address);
+
+    const QString & getName() const;
+    const QString & getAddress() const;
 
     /* [2] --- */
 
-protected:
 
-    /* [3] Protected members */
+private:
 
-    QFile* file;
+    /* [3] Private members */
+
+    QString name;
+    QString address;
 
     /* [3] --- */
-
-
-    /* [4] Protected methods */
-
-    virtual void prepare();
-
-    /* [4] --- */
-
 };
 
-#endif // MIMEFILE_H
+#endif // EMAILADDRESS_H

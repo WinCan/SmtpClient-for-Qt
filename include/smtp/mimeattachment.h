@@ -16,24 +16,36 @@
   See the LICENSE file for more details.
 */
 
-#ifndef QUOTEDPRINTABLE_H
-#define QUOTEDPRINTABLE_H
+#ifndef MIMEATTACHMENT_H
+#define MIMEATTACHMENT_H
 
-#include <QObject>
-#include <QByteArray>
+#include <QFile>
+#include "mimepart.h"
+#include "mimefile.h"
 
-#include "smtpexports.h"
+#include "smtp_export.h"
 
-class SMTP_EXPORT QuotedPrintable : public QObject
+class SMTP_EXPORT MimeAttachment : public MimeFile
 {
     Q_OBJECT
 public:
 
-    static QString encode(const QByteArray &input);
-    static QByteArray decode(const QString &input);
+    /* [1] Constructors and Destructors */
 
-private:
-    QuotedPrintable();
+    MimeAttachment(QFile* file);
+    MimeAttachment(const QByteArray& stream, const QString& fileName);
+
+    ~MimeAttachment();
+
+    /* [1] --- */
+
+protected:
+
+    /* [2] Protected methods */
+
+    virtual void prepare();
+
+    /* [2] --- */
 };
 
-#endif // QUOTEDPRINTABLE_H
+#endif // MIMEATTACHMENT_H

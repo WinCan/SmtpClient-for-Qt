@@ -22,7 +22,7 @@
 #include <QObject>
 #include "mimecontentformatter.h"
 
-#include "smtpexports.h"
+#include "smtp_export.h"
 
 class SMTP_EXPORT MimePart : public QObject
 {
