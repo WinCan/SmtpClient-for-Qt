@@ -23,7 +23,7 @@
 #include <QtNetwork/QSslSocket>
 
 #include "mimemessage.h"
-#include "smtpexports.h"
+#include "smtp_export.h"
 
 class SMTP_EXPORT SmtpClient : public QObject
 {

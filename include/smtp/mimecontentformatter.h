@@ -16,36 +16,28 @@
   See the LICENSE file for more details.
 */
 
-#ifndef MIMEATTACHMENT_H
-#define MIMEATTACHMENT_H
+#ifndef MIMECONTENTFORMATTER_H
+#define MIMECONTENTFORMATTER_H
 
-#include <QFile>
-#include "mimepart.h"
-#include "mimefile.h"
+#include <QObject>
+#include <QByteArray>
 
-#include "smtpexports.h"
+#include "smtp_export.h"
 
-class SMTP_EXPORT MimeAttachment : public MimeFile
+class SMTP_EXPORT MimeContentFormatter : public QObject
 {
     Q_OBJECT
 public:
+    MimeContentFormatter (int max_length = 76);
 
-    /* [1] Constructors and Destructors */
+    void setMaxLength(int l);
+    int getMaxLength() const;
 
-    MimeAttachment(QFile* file);
-    MimeAttachment(const QByteArray& stream, const QString& fileName);
-
-    ~MimeAttachment();
-
-    /* [1] --- */
+    QString format(const QString &content, bool quotedPrintable = false) const;
 
 protected:
+    int max_length;
 
-    /* [2] Protected methods */
-
-    virtual void prepare();
-
-    /* [2] --- */
 };
 
-#endif // MIMEATTACHMENT_H
+#endif // MIMECONTENTFORMATTER_H

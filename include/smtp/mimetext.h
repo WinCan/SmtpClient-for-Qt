@@ -16,26 +16,30 @@
   See the LICENSE file for more details.
 */
 
-#ifndef MIMEINLINEFILE_H
-#define MIMEINLINEFILE_H
+#ifndef MIMETEXT_H
+#define MIMETEXT_H
 
-#include "mimefile.h"
+#include "mimepart.h"
 
-#include "smtpexports.h"
+#include "smtp_export.h"
 
-class SMTP_EXPORT MimeInlineFile : public MimeFile
+class SMTP_EXPORT MimeText : public MimePart
 {
 public:
 
     /* [1] Constructors and Destructors */
 
-    MimeInlineFile(QFile *f);
-    ~MimeInlineFile();
+    MimeText(const QString &text = "");
+    ~MimeText();
 
     /* [1] --- */
 
 
-    /* [2] Getters and Setters */
+    /* [2] Getters and Setters*/
+
+    void setText(const QString & text);
+
+    const QString & getText() const;
 
     /* [2] --- */
 
@@ -43,14 +47,16 @@ protected:
 
     /* [3] Protected members */
 
+    QString text;
     /* [3] --- */
 
 
     /* [4] Protected methods */
 
-    virtual void prepare();
+    void prepare();
 
     /* [4] --- */
+
 };
 
-#endif // MIMEINLINEFILE_H
+#endif // MIMETEXT_H
